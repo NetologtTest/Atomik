@@ -1,20 +1,24 @@
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
+
 
 public class Main {
 
-    private static AtomicInteger Three = new AtomicInteger();
-    private static AtomicInteger Four = new AtomicInteger();
-    private static AtomicInteger Five = new AtomicInteger();
+    private static AtomicInteger three = new AtomicInteger();
+    private static AtomicInteger four = new AtomicInteger();
+    private static AtomicInteger five = new AtomicInteger();
 
-    public static boolean isPalindromeUsingIntStream(String text) { // похищенно
-        String temp = text.replaceAll("\\s+", "").toLowerCase();
-        return IntStream.range(0, temp.length() / 2)
-                .noneMatch(i -> temp.charAt(i) != temp.charAt(temp.length() - i - 1));
+    public static boolean isPalindromeUsingIntStream(String text) { // РїРѕС…РёС‰РµРЅРЅРѕ
+        StringBuilder reverse = new StringBuilder();
+        String clean = text.replaceAll("\\s+", "").toLowerCase();
+        char[] plain = clean.toCharArray();
+        for (int i = plain.length - 1; i >= 0; i--) {
+            reverse.append(plain[i]);
+        }
+        return (reverse.toString()).equals(clean);
     }
 
-    public static boolean isAlpha(String text) { // похищенно
+    public static boolean isAlpha(String text) { // РїРѕС…РёС‰РµРЅРЅРѕ
         char[] chars = text.toCharArray();
 
         for (char c : chars) {
@@ -26,7 +30,7 @@ public class Main {
         return true;
     }
 
-    public static boolean isAlphabet(String text) { // похищенно
+    public static boolean isAlphabet(String text) { // РїРѕС…РёС‰РµРЅРЅРѕ
         int i = 0;
         boolean ascend = false;
         while (i < text.length() - 1) {
@@ -59,48 +63,48 @@ public class Main {
 
             new Thread(() -> {
                 if (isPalindromeUsingIntStream(a)) {
-                    Three.getAndAdd(1);
+                    three.getAndAdd(1);
                 }
                 if (isPalindromeUsingIntStream(b)) {
-                    Four.getAndAdd(1);
+                    four.getAndAdd(1);
                 }
                 if (isPalindromeUsingIntStream(c)) {
-                    Five.getAndAdd(1);
+                    five.getAndAdd(1);
                 }
             }).start();
 
             new Thread(() -> {
                 if (isAlpha(a)) {
-                    Three.getAndAdd(1);
+                    three.getAndAdd(1);
                 }
 
                 if (isAlpha(b)) {
-                    Four.getAndAdd(1);
+                    four.getAndAdd(1);
                 }
 
                 if (isAlpha(c)) {
-                    Five.getAndAdd(1);
+                    five.getAndAdd(1);
                 }
             }).start();
 
             new Thread(() -> {
 
                 if (isAlphabet(a)) {
-                    Three.getAndAdd(1);
+                    three.getAndAdd(1);
                 }
                 if (isAlphabet(b)) {
-                    Four.getAndAdd(1);
+                    four.getAndAdd(1);
                 }
                 if (isAlphabet(c)) {
-                    Five.getAndAdd(1);
+                    five.getAndAdd(1);
                 }
 
 
             }).start();
         }
-        System.out.println("Красивых слов с длиной 3:" + Three + "шт");
-        System.out.println("Красивых слов с длиной 4:" + Four + "шт");
-        System.out.println("Красивых слов с длиной 5:" + Five + "шт");
+        System.out.println("РљСЂР°СЃРёРІС‹С… СЃР»РѕРІ СЃ РґР»РёРЅРѕР№ 3:" + three + "С€С‚");
+        System.out.println("РљСЂР°СЃРёРІС‹С… СЃР»РѕРІ СЃ РґР»РёРЅРѕР№ 4:" + four + "С€С‚");
+        System.out.println("РљСЂР°СЃРёРІС‹С… СЃР»РѕРІ СЃ РґР»РёРЅРѕР№ 5:" + five + "С€С‚");
 
     }
 
